@@ -1,0 +1,55 @@
+{
+  "Index": {
+    "title": "Listado de posts",
+    "description": "Esta es la página de inicio."
+  },
+  "Auth": {
+    "login": {
+      "title": "Iniciar sesión",
+      "description": "Rellena el formulario para iniciar sesión.",
+      "submit": "Iniciar sesión",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "signUpDescription": "¿No tienes una cuenta?",
+      "signUp": "Registrarse"
+    },
+    "logout": {
+      "title": "Cerrar sesión",
+      "description": "¿Estás seguro de que quieres cerrar sesión?",
+      "submit": "Cerrar sesión"
+    },
+    "signUp": {
+      "title": "Registrarse",
+      "description": "Rellena el formulario para registrarte.",
+      "submit": "Registrarse",
+      "email": "Correo electrónico",
+      "username": "Nombre de usuario",
+      "password": "Contraseña",
+      "signInDescription": "¿Tienes una cuenta?",
+      "signIn": "Iniciar sesión"
+    }
+  },
+  "Posts": {
+    "create": {
+      "titlePage": "Crear un nuevo post",
+      "description": "Rellena el formulario para crear un nuevo post.",
+      "submit": "Crear post",
+      "title": "Título",
+      "test": "Prueba",
+      "text": "Texto"
+    },
+    "list": {
+      "title": "Posts",
+      "description": "Aquí puedes ver todos los posts.",
+      "viewMore": "Ver más",
+      "noPosts": "No hay mas posts",
+      "loading": "Cargando..."
+    }
+  },
+  "LocaleSwitcher": {
+    "switchLocale": "Cambiar a {locale, select, de {Alemán} en {Inglés} other {Desconocido}}"
+  },
+  "PageLayout": {
+    "pageTitle": "next-intl"
+  }
+}

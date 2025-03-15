@@ -1,0 +1,55 @@
+{
+  "Index": {
+    "title": "Posts List",
+    "description": "This is the home page."
+  },
+  "Auth": {
+    "login": {
+      "title": "Login",
+      "description": "Fill out the form to login.",
+      "submit": "Login",
+      "email": "Email",
+      "password": "Password",
+      "signUpDescription": "Don't have an account?",
+      "signUp": "Sign up"
+    },
+    "logout": {
+      "title": "Logout",
+      "description": "Are you sure you want to logout?",
+      "submit": "Logout"
+    },
+    "signUp": {
+      "title": "Register",
+      "description": "Fill out the form to register.",
+      "submit": "Register",
+      "email": "Email",
+      "username": "Username",
+      "password": "Password",
+      "signInDescription": "Already have an account?",
+      "signIn": "Sign in"
+    }
+  },
+  "Posts": {
+    "create": {
+      "titlePage": "Create a new post",
+      "description": "Fill out the form to create a new post.",
+      "submit": "Create post",
+      "title": "Title",
+      "test": "Test",
+      "text": "Text"
+    },
+    "list": {
+      "title": "Posts",
+      "description": "Here you can see all posts.",
+      "viewMore": "View more",
+      "noPosts": "No more posts",
+      "loading": "Loading..."
+    }
+  },
+  "LocaleSwitcher": {
+    "switchLocale": "Switch to {locale, select, de {German} en {English} other {Unknown}}"
+  },
+  "PageLayout": {
+    "pageTitle": "next-intl"
+  }
+}
