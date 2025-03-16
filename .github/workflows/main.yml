@@ -73,7 +73,8 @@ jobs:
           - 5432:5432
     env:
       NODE_ENV: test
-      NEXTAUTH_SECRET: supersecret
+      NEXTAUTH_SECRET: ${{ secrets.AUTH }}
+      DATABASE_URL: ${{ secrets.BD }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
