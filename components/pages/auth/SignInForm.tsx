@@ -63,6 +63,7 @@ export const SigInForm = () => {
           <FormField
             id="email"
             label={t('login.email')}
+            dataCy="login-login-email"
             placeholder={t('login.email')}
             type="input"
             error={errors.email?.message}
@@ -71,12 +72,18 @@ export const SigInForm = () => {
           <FormField
             id="password"
             label={t('login.password')}
+            dataCy="login-login-password"
             placeholder={t('login.password')}
             type="password"
             error={errors.password?.message}
             {...register('password')}
           />
-          <Button className="w-full" type="submit" disabled={isLoading}>
+          <Button
+            className="w-full"
+            type="submit"
+            disabled={isLoading}
+            data-cy="login-login-submit"
+          >
             {isLoading ? t('login.loading') : t('login.submit')}
           </Button>
           {error && <div className="text-red-500">{error}</div>}
@@ -85,7 +92,11 @@ export const SigInForm = () => {
 
       <CardFooter className="text-center justify-center">
         {t('login.signUpDescription')}{' '}
-        <Button variant="link" className="font-medium hover:underline">
+        <Button
+          variant="link"
+          className="font-medium hover:underline"
+          data-cy="login-login-sign-up-button"
+        >
           <Link href="/sign-up">{t('login.signUp')}</Link>
         </Button>
       </CardFooter>

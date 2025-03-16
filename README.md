@@ -15,7 +15,7 @@ A secure administration dashboard built with modern technologies that provides a
 - ⚙️ Recommended VSCode extensions
 - 🎨 Code formatting with ESLint + Prettier
 - 💚 CI/CD configured with GitHub Actions:
-  - ✅ E2E tests with [Playwright](https://playwright.dev/)
+  - ✅ E2E tests with [Cypress](https://docs.cypress.io/)
   - ✅ Unit tests with Vitest
   - ✅ Automatic linting
 - 🔐 Environment variable validation during build and startup
@@ -85,8 +85,8 @@ pnpm start      # Starts the application in production mode
 
 ```bash
 pnpm test-unit      # Runs unit tests with Vitest
-pnpm test-e2e       # Runs E2E tests with Playwright
-pnpm test-dev       # Runs E2E tests in development mode
+pnpm test-e2e       # Runs E2E tests with Cypress
+pnpm test-dev       # Runs E2E tests in development mode using Cypress
 pnpm test-start     # Runs both unit and E2E tests
 ```
 
@@ -111,12 +111,30 @@ a-safe-dashboard/
 │   ├── pages/        # Page-specific components
 │   ├── providers/    # Context providers
 │   └── UI/           # User interface components
+├── cypress/          # E2E tests with Cypress
+│   ├── downloads/    # Files downloaded during test execution
+│   ├── e2e/          # End-to-end test specifications
+│   │   ├── login.cy.ts               # Login flow tests
+│   │   └── utilities/                # Reusable test utilities
+│   │       ├── common.classes.ts     # Common CSS class selectors
+│   │       ├── common.selectors.ts   # Common element selectors
+│   │       ├── utils.ts              # General utility functions
+│   │       ├── components/           # Component-specific utilities
+│   │       ├── login/                # Login-specific utilities
+│   │       │   └── login.selectors.ts # Login page selectors
+│   │       ├── models/               # Data models for tests
+│   │       └── utils/                # Additional utility functions
+│   │           └── loginCredentials.ts # Test credentials
+│   ├── fixtures/     # Test data files
+│   │   └── example.json # Example test data
+│   └── support/      # Global test configuration
+│       ├── commands.ts # Custom Cypress commands
+│       └── e2e.ts    # E2E test configuration
 ├── handlers/         # Business logic handlers
 ├── lib/              # Libraries and utilities
 ├── messages/         # Internationalization messages
 │   ├── en.json       # English translations
 │   └── es.json       # Spanish translations
-├── playwright/       # E2E tests with Playwright
 ├── prisma/           # Database schema and migrations
 ├── public/           # Static assets
 ├── src/              # Main source code
@@ -133,7 +151,7 @@ a-safe-dashboard/
 - **API**: tRPC for typed APIs
 - **Database**: PostgreSQL with Prisma ORM
 - **Authentication**: NextAuth.js
-- **Testing**: Vitest (unit) and Playwright (E2E)
+- **Testing**: Vitest (unit) and cypress (E2E)
 - **Styling**: Tailwind CSS, Radix UI
 - **Internationalization**: next-intl
 - **Charts**: Chart.js / react-chartjs-2

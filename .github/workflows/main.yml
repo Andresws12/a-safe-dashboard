@@ -33,9 +33,6 @@ jobs:
       - name: Install deps (with cache)
         run: pnpm install
 
-      - name: Install playwright
-        run: pnpm playwright install chromium
-
       - name: Next.js cache
         uses: actions/cache@v3
         with:
@@ -50,14 +47,6 @@ jobs:
 
       - name: Check types
         run: pnpm tsc
-
-      - name: Upload test results
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: test results
-          path: |
-            playwright/test-results
 
   unit:
     name: 'Unit tests + typecheck'
