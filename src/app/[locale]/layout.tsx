@@ -6,6 +6,7 @@ import { getMessages } from 'next-intl/server';
 
 import SessionWrapper from '@/components/providers/SessionWrapper';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
+import Github from '@/components/UI/atoms/github';
 import ThemeToggle from '@/components/UI/atoms/theme-toggle';
 import LanguageSelector from '@/components/UI/organisms/languaje-selector';
 import { routing } from '@/src/i18n/routing';
@@ -41,6 +42,7 @@ export default async function RootLayout({
               {children}
               <ThemeToggle />
               <LanguageSelector locale={locale} />
+              <Github />
             </ThemeProvider>
           </NextIntlClientProvider>
         </SessionWrapper>
