@@ -1,7 +1,9 @@
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
+
 import { prisma } from '~/server/prisma';
 import { listPostsSchema, postByIdSchema } from '~/server/schemas/postSchemas';
+
 import { defaultPostSelect } from './postHelpers';
 
 export const listPosts = async (input: z.infer<typeof listPostsSchema>) => {
@@ -11,7 +13,6 @@ export const listPosts = async (input: z.infer<typeof listPostsSchema>) => {
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/pagination
    */
 
-  console.log('listPosts', input);
   const limit = input.limit ?? 50;
   const { cursor } = input;
 

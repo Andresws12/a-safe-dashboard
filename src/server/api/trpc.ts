@@ -7,11 +7,11 @@
  * need to use are documented accordingly near the end.
  */
 import { initTRPC, TRPCError } from '@trpc/server';
+import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
+import type { JWT } from 'next-auth/jwt';
 import superjson from 'superjson';
 import { ZodError } from 'zod';
-
-import type { NextRequest } from 'next/server';
 
 interface CreateContextOptions {
   headers: Headers;
@@ -29,17 +29,27 @@ interface CreateContextOptions {
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: CreateContextOptions) => {
-  // const token = await getToken({ req: opts.req });
 
-  // if (!token?.idToken) {
-  //   throw new TRPCError({ code: 'UNAUTHORIZED' });
-  // }
+interface Context {
+  headers: Headers;
+  req: NextRequest;
+  userId: string;
+  token: JWT; // Using the JWT type from next-auth/jwt
+}
+
+export const createTRPCContext = async (
+  opts: CreateContextOptions,
+): Promise<Context> => {
+  const token = await getToken({ req: opts.req });
+
+  if (!token?.id) {
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
+  }
 
   return {
     ...opts,
-    // userId: token.idToken,
-    // token
+    userId: token.id as string,
+    token,
   };
 };
 

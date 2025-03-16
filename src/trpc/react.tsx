@@ -1,13 +1,14 @@
 'use client';
 
-import { useMemo } from 'react';
 import { QueryClientProvider, type QueryClient } from '@tanstack/react-query';
 import { loggerLink, unstable_httpBatchStreamLink } from '@trpc/client';
 import { createTRPCReact } from '@trpc/react-query';
 import { type inferRouterInputs, type inferRouterOutputs } from '@trpc/server';
+import { useMemo } from 'react';
 import SuperJSON from 'superjson';
 
 import { type AppRouter } from '@/src/server/api/root';
+
 import { createQueryClient } from './query-client';
 
 let clientQueryClientSingleton: QueryClient | undefined;
@@ -31,8 +32,12 @@ export type RouterOutputs = inferRouterOutputs<AppRouter>;
  * Determines the base URL for API calls, depending on the environment.
  */
 function getBaseUrl(): string {
-  if (typeof window !== 'undefined') return window.location.origin;
-  if (process.env.DEPLOY_URL) return `https://${process.env.DEPLOY_URL}`;
+  if (typeof window !== 'undefined') {
+    return window.location.origin;
+  }
+  if (process.env.DEPLOY_URL) {
+    return `https://${process.env.DEPLOY_URL}`;
+  }
   return `http://localhost:${process.env.PORT ?? 3000}`;
 }
 

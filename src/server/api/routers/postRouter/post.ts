@@ -3,14 +3,14 @@
  * This is an example router, you can delete this file and then update `../pages/api/trpc/[trpc].tsx`
  */
 import { createTRPCRouter, publicProcedure } from '~/server/api/trpc';
-
 import {
   addPostSchema,
   listPostsSchema,
   postByIdSchema,
 } from '~/server/schemas/postSchemas';
-import { listPosts, postById } from './queries-handler';
+
 import { addPost } from './mutation-handler';
+import { listPosts, postById } from './queries-handler';
 
 export const postRouter = createTRPCRouter({
   list: publicProcedure

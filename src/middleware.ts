@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server';
 import { withAuth } from 'next-auth/middleware';
 import createMiddleware from 'next-intl/middleware';
+
 import { routing } from './i18n/routing';
 
 const publicPages = ['/', '/sign-up'];
@@ -25,7 +26,9 @@ export default function middleware(req: NextRequest) {
   if (isPublicPage) {
     return intlMiddleware(req);
   } else {
-    return (authMiddleware as any)(req);
+    return (
+      authMiddleware as (req: NextRequest) => ReturnType<typeof intlMiddleware>
+    )(req);
   }
 }
 

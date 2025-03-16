@@ -1,4 +1,3 @@
-import { Description } from '@radix-ui/react-dialog';
 import type { Prisma } from '@prisma/client';
 
 /**

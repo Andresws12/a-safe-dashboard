@@ -2,14 +2,12 @@
  *
  * This is an example router, you can delete this file and then update `../pages/api/trpc/[trpc].tsx`
  */
-import { createTRPCRouter, publicProcedure } from '~/server/api/trpc';
-
-import { signUpSchema } from '~/server/schemas/authSchemas';
-
 import { TRPCError } from '@trpc/server';
-import { prisma } from '~/server/prisma';
-
 import { hash } from 'argon2';
+
+import { createTRPCRouter, publicProcedure } from '~/server/api/trpc';
+import { prisma } from '~/server/prisma';
+import { signUpSchema } from '~/server/schemas/authSchemas';
 
 export const authRouter = createTRPCRouter({
   signUp: publicProcedure.input(signUpSchema).mutation(async ({ input }) => {

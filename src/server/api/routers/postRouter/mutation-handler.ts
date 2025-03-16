@@ -1,8 +1,10 @@
-import { prisma } from '~/server/prisma';
-import { defaultPostSelect } from './postHelpers';
-import { addPostSchema } from '~/server/schemas/postSchemas';
-import { z } from 'zod';
 import { TRPCError } from '@trpc/server';
+import { z } from 'zod';
+
+import { prisma } from '~/server/prisma';
+import { addPostSchema } from '~/server/schemas/postSchemas';
+
+import { defaultPostSelect } from './postHelpers';
 
 export const addPost = async (input: z.infer<typeof addPostSchema>) => {
   try {

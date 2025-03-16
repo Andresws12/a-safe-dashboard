@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+
 import DashboardLayout from '@/components/UI/layout/DashboardLayout';
 type DashboardLayoutProps = { children: ReactNode };
 

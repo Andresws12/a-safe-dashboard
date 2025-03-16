@@ -1,8 +1,9 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import { PostList } from '@/components/pages/post/postList';
 import { usePost } from '~/hooks/usePost';
-import { useTranslations } from 'next-intl';
 
 export default function Page() {
   const t = useTranslations('Posts');
