@@ -12,7 +12,6 @@ import {
   SidebarRail,
 } from '@/components/UI/layout/sidebar';
 
-// This is sample data.
 const data = {
   navMain: [
     {
