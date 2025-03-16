@@ -1,4 +1,4 @@
-import { BookOpen, GalleryVerticalEnd, SquareTerminal } from 'lucide-react';
+import { GalleryVerticalEnd, SquareTerminal } from 'lucide-react';
 import NextImage from 'next/image';
 import * as React from 'react';
 
@@ -14,18 +14,6 @@ import {
 
 // This is sample data.
 const data = {
-  user: {
-    name: 'Andres',
-    email: 'andres-hernandez.com',
-    avatar: '/avatars/shadcn.jpg',
-  },
-  teams: [
-    {
-      name: 'Acme Inc',
-      logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
-    },
-  ],
   navMain: [
     {
       title: 'Posts',
@@ -62,7 +50,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
