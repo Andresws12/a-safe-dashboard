@@ -32,14 +32,27 @@
   "Posts": {
     "create": {
       "titlePage": "Create a new post",
-      "description": "Fill out the form to create a new post.",
       "submit": "Create post",
       "title": "Title",
-      "test": "Test",
-      "text": "Text"
+      "titlePlaceholder": "Enter post title",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter a brief description",
+      "text": "Text",
+      "textPlaceholder": "Write your post content here",
+      "category": "Category",
+      "categoryPlaceholder": "Select a category",
+      "readTime": "Reading time",
+      "saving": "Saving...",
+      "saved": "Saved"
+    },
+    "categories": {
+      "tutorial": "TUTORIAL",
+      "review": "REVIEW",
+      "news": "NEWS",
+      "other": "OTHER"
     },
     "list": {
-      "title": "Posts",
+      "titlePage": "Posts",
       "description": "Here you can see all posts.",
       "viewMore": "View more",
       "noPosts": "No more posts",

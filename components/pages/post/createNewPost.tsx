@@ -1,11 +1,16 @@
-'use client';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Button } from '@/components/UI/atoms/button';
-import { Card, CardHeader, CardContent, CardFooter } from '@/components/UI/molecules/card';
-import FormField from '@/components/UI/molecules/formField';
-import { addPostSchema } from '~/server/schemas/postSchemas';
-import * as z from 'zod';
 import { useTranslations } from 'next-intl';
+
+import { Card, CardContent, CardFooter } from '@/components/UI/molecules/card';
+import FormField from '@/components/UI/molecules/formField';
+import { Button } from '@/components/UI/atoms/button';
+import { Label } from '@/components/UI/atoms/label';
+
+import { addPostSchema } from '~/server/schemas/postSchemas';
+
+import * as z from 'zod';
+
+import { Clock, Save } from 'lucide-react';
 
 type PostFormData = z.infer<typeof addPostSchema>;
 
@@ -23,50 +28,99 @@ export const CreatePostCard: React.FC<CreatePostCardProps> = ({
   error,
 }) => {
   const t = useTranslations('Posts');
-  const { register, formState: { errors } } = methods;
+  const {
+    register,
+    formState: { errors },
+    setValue,
+    watch,
+  } = methods;
+
+  const handleSelectChange = (field: string, value: string) => {
+    setValue(field as any, value);
+  };
 
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <h3 className="text-xl font-semibold">{t('create.titlePage')}</h3>
-      </CardHeader>
-      <CardContent>
-        <form className="py-2" onSubmit={methods.handleSubmit(onSubmit)}>
-          <div className="flex flex-col gap-y-4 font-semibold">
+    <div className="container max-w-4xl py-12">
+      <Card>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <CardContent className="space-y-6 py-6">
             <FormField
               id="title"
-              label={t('create.title')}
-              type="text"
+              label={`${t('create.title')} *`}
+              placeholder={t('create.titlePlaceholder')}
               disabled={isPending}
-              error={errors.title?.message}
+              error={errors.title?.message as string}
               {...register('title')}
             />
+
             <FormField
-              id="test"
-              label={t('create.test')}
-              type="text"
+              id="Description"
+              label={`${t('create.description')} *`}
+              placeholder={t('create.descriptionPlaceholder')}
               disabled={isPending}
-              error={errors.test?.message}
-              {...register('test')}
-            />
-            <FormField
-              id="text"
-              label={t('create.text')}
               type="textarea"
-              disabled={isPending}
-              error={errors.text?.message}
-              {...register('text')}
+              rows={5}
+              error={errors.description?.message as string}
+              {...register('description')}
             />
 
-            <div className="flex justify-center">
-              <Button type="submit" disabled={isPending}>
-                {t('create.submit')}
-              </Button>
-              {error && <p style={{ color: 'red' }}>{error.message}</p>}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FormField
+                id="category"
+                label={`${t('create.category')} *`}
+                placeholder={t('create.categoryPlaceholder')}
+                disabled={isPending}
+                type="select"
+                value={watch('category')}
+                error={errors.category?.message as string}
+                options={[
+                  { value: 'TUTORIAL', label: t('categories.tutorial') },
+                  { value: 'REVIEW', label: t('categories.review') },
+                  { value: 'NEWS', label: t('categories.news') },
+                  { value: 'OTHER', label: t('categories.other') },
+                ]}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                  handleSelectChange('category', e.target.value)
+                }
+              />
+
+              <div className="space-y-2">
+                <Label htmlFor="readTime">{t('create.readTime')}</Label>
+                <div className="relative">
+                  <FormField
+                    id="readTime"
+                    label=""
+                    placeholder="5"
+                    disabled={isPending}
+                    className="pl-8"
+                    error={errors.readTime?.message as string}
+                    {...register('readTime')}
+                  />
+                  <Clock className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <span className="absolute right-3 top-2.5 text-muted-foreground">
+                    min
+                  </span>
+                </div>
+              </div>
             </div>
-          </div>
+          </CardContent>
+          <CardFooter className="flex justify-between">
+            <Button type="submit" disabled={isPending}>
+              {isPending ? (
+                <>{t('create.saving')}</>
+              ) : (
+                <>
+                  <Save className="mr-2 h-4 w-4" />
+                  {t('create.submit')}
+                </>
+              )}
+            </Button>
+          </CardFooter>
         </form>
-      </CardContent>
-    </Card>
+      </Card>
+      {error && (
+        <p className="text-center mt-4 text-destructive">{error.message}</p>
+      )}
+    </div>
   );
 };

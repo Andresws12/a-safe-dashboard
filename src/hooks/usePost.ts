@@ -1,8 +1,12 @@
 import { api } from '@/src/trpc/react';
 import { inferProcedureInput } from '@trpc/server';
+
 import { AppRouter } from '~/server/api/root';
 import { addPostSchema } from '~/server/schemas/postSchemas';
+
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useSession } from 'next-auth/react';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 
@@ -10,6 +14,7 @@ type PostFormData = z.infer<typeof addPostSchema>;
 
 export const usePost = () => {
   const utils = api.useUtils();
+  const { data: session } = useSession();
 
   // Fetch posts
   const { data, status, hasNextPage, isFetchingNextPage, fetchNextPage } =
@@ -32,7 +37,12 @@ export const usePost = () => {
 
   const onSubmit: SubmitHandler<PostFormData> = async (formData) => {
     type Input = inferProcedureInput<AppRouter['post']['add']>;
-    const input: Input = { ...formData };
+    const input: Input = {
+      ...formData,
+      date: new Date().toISOString(),
+      author: session?.user?.email ?? '',
+    };
+
     try {
       await mutateAsync(input);
       methods.reset();

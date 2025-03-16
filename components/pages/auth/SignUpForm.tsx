@@ -7,7 +7,12 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 
-import { Card, CardHeader, CardContent, CardFooter } from '@/components/UI/molecules/card';
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+} from '@/components/UI/molecules/card';
 import { Button } from '@/components/UI/atoms/button';
 import FormField from '@/components/UI/molecules/formField';
 
@@ -22,7 +27,11 @@ export const SignUpForm = () => {
   const t = useTranslations('Auth');
   const signUp = api.auth.signUp.useMutation();
 
-  const { handleSubmit, register, formState: { errors } } = form;
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = form;
 
   const onSubmit = async (data: ISignUp) => {
     const res = await signUp.mutateAsync(data);
@@ -46,7 +55,7 @@ export const SignUpForm = () => {
             id="username"
             label={t('signUp.username')}
             placeholder={t('signUp.username')}
-            type="text"
+            type="input"
             {...register('username')}
             error={errors.username?.message}
           />
@@ -74,13 +83,8 @@ export const SignUpForm = () => {
 
       <CardFooter className="text-center">
         {t('signUp.signInDescription')}{' '}
-        <Button
-          className="font-medium hover:underline"
-          variant="link"
-        >
-          <Link href="/">
-            {t('signUp.signIn')}
-          </Link>
+        <Button className="font-medium hover:underline" variant="link">
+          <Link href="/">{t('signUp.signIn')}</Link>
         </Button>
       </CardFooter>
     </Card>

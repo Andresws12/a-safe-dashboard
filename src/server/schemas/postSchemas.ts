@@ -7,8 +7,11 @@ export const addPostSchema = z.object({
     .trim()
     .min(1, 'Title is too short')
     .max(32, 'Title is too long'),
-  text: z.string().trim().min(1, 'Text is required'),
-  test: z.string().trim().min(1, 'Test is required'),
+  description: z.string().trim().min(1, 'Test is required'),
+  date: z.string().optional(),
+  category: z.enum(['TUTORIAL', 'REVIEW', 'NEWS', 'OTHER']),
+  readTime: z.string().optional(),
+  author: z.string().optional(),
 });
 
 export const listPostsSchema = z.object({

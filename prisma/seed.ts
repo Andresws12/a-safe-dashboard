@@ -16,8 +16,11 @@ async function main() {
     create: {
       id: firstPostId,
       title: 'First Post',
-      text: 'This is an example post generated from `prisma/seed.ts`',
-      test: 'This is a test',
+      description: 'This is the first post in the database',
+      date: '2021-01-01T00:00:00Z',
+      category: 'TUTORIAL',
+      readTime: '5 min',
+      author: 'John Doe',
     },
     update: {},
   });

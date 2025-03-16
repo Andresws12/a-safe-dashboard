@@ -7,7 +7,12 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { signIn } from 'next-auth/react';
 
-import { Card, CardHeader, CardContent, CardFooter } from '@/components/UI/molecules/card';
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+} from '@/components/UI/molecules/card';
 import { Button } from '@/components/UI/atoms/button';
 import FormField from '@/components/UI/molecules/formField';
 
@@ -55,7 +60,7 @@ export const SigInForm = () => {
             id="email"
             label={t('login.email')}
             placeholder={t('login.email')}
-            type="text"
+            type="input"
             error={errors.email?.message}
             {...register('email')}
           />
@@ -76,13 +81,8 @@ export const SigInForm = () => {
 
       <CardFooter className="text-center justify-center">
         {t('login.signUpDescription')}{' '}
-        <Button
-          variant="link"
-          className="font-medium hover:underline"
-        >
-          <Link href="/sign-up">
-            {t('login.signUp')}
-          </Link>
+        <Button variant="link" className="font-medium hover:underline">
+          <Link href="/sign-up">{t('login.signUp')}</Link>
         </Button>
       </CardFooter>
     </Card>

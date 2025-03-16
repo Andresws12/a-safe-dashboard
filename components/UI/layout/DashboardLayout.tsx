@@ -1,11 +1,19 @@
-import type { ReactNode } from 'react';
+import Header from '@/components/common/header/header';
+import { AppSidebar } from '@/components/common/navigation/app-sidebar';
+import { SidebarInset, SidebarProvider } from '@/components/UI/layout/sidebar';
 
-type DashboardLayoutProps = { children: ReactNode };
-
-export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+export default function DashboardLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <main >
-      {children}
-    </main>
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <Header />
+        {children}
+      </SidebarInset>
+    </SidebarProvider>
   );
-};
+}

@@ -7,9 +7,11 @@
 @variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
   body {
-    height: 100vh;
-    padding: 0 32px;
+    @apply bg-background text-foreground;
   }
 }
 

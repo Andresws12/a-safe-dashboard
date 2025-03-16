@@ -32,14 +32,27 @@
   "Posts": {
     "create": {
       "titlePage": "Crear un nuevo post",
-      "description": "Rellena el formulario para crear un nuevo post.",
       "submit": "Crear post",
       "title": "Título",
-      "test": "Prueba",
-      "text": "Texto"
+      "titlePlaceholder": "Introduce el título del post",
+      "description": "Descripción",
+      "descriptionPlaceholder": "Introduce una breve descripción",
+      "text": "Texto",
+      "textPlaceholder": "Escribe el contenido del post aquí",
+      "category": "Categoría",
+      "categoryPlaceholder": "Selecciona una categoría",
+      "readTime": "Tiempo de lectura",
+      "saving": "Guardando...",
+      "saved": "Guardado"
+    },
+    "categories": {
+      "tutorial": "TUTORIAL",
+      "review": "REVIEW",
+      "news": "NEWS",
+      "other": "OTHER"
     },
     "list": {
-      "title": "Posts",
+      "titlePage": "Posts",
       "description": "Aquí puedes ver todos los posts.",
       "viewMore": "Ver más",
       "noPosts": "No hay mas posts",

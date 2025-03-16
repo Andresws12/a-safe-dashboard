@@ -1,14 +1,7 @@
-import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
+import DashboardLayout from '@/components/UI/layout/DashboardLayout';
+type DashboardLayoutProps = { children: ReactNode };
 
-export const metadata: Metadata = {
-  title: 'Dashboard',
-  description: 'Make it fun.',
-};
-
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return <div className="flex">{children}</div>;
+export default function Layout({ children }: DashboardLayoutProps) {
+  return <DashboardLayout>{children}</DashboardLayout>;
 }

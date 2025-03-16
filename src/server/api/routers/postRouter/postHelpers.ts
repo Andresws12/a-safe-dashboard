@@ -1,3 +1,4 @@
+import { Description } from '@radix-ui/react-dialog';
 import type { Prisma } from '@prisma/client';
 
 /**
@@ -8,8 +9,11 @@ import type { Prisma } from '@prisma/client';
 export const defaultPostSelect = {
   id: true,
   title: true,
-  text: true,
-  test: true,
+  description: true,
+  date: true,
+  category: true,
+  readTime: true,
+  author: true,
   createdAt: true,
   updatedAt: true,
 } satisfies Prisma.PostSelect;

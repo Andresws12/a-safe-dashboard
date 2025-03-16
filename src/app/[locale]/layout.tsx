@@ -37,10 +37,7 @@ export default async function RootLayout({
   const messages = await getMessages({ locale });
   return (
     <html lang={locale}>
-      <body
-        className={`${inter.className} overflow-hidden `}
-        suppressHydrationWarning={true}
-      >
+      <body className={`${inter.className} overflow-hidden `}>
         <SessionWrapper>
           <NextIntlClientProvider messages={messages}>
             <ThemeProvider>
