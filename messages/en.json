@@ -62,6 +62,10 @@
       "loading": "Loading..."
     }
   },
+  "Overview": {
+    "titlePage": "Overview",
+    "description": "This is the overview page."
+  },
   "dashboard": {
     "title": "Dashboard",
     "listLink": "List",

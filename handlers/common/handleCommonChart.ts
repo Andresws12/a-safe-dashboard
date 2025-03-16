@@ -33,7 +33,9 @@ export const shuffleArray = () => {
  * @param data The data to be used in the chart.
  * @returns The chart data object.
  */
-export const generatePieChartData = (data: { name: string; value: number }[]) => {
+export const generatePieChartData = (
+  data: { name: string; value: number }[],
+) => {
   const shuffledColors = shuffleArray();
   return {
     labels: data.map((item) => item.name),
@@ -82,16 +84,18 @@ type CategoryItem = {
 
 export function getCategoryDistribution(pages: Page[]): CategoryItem[] {
   return pages
-      .flatMap((page: Page) => page.items)
-      .reduce((categories: CategoryItem[], item: { category: string }) => {
-          const existingCategory = categories.find((cat: CategoryItem) => cat.name === item.category);
-          
-          if (existingCategory) {
-              existingCategory.value += 1;
-          } else {
-              categories.push({ name: item.category, value: 1 });
-          }
-          
-          return categories;
-      }, []);
+    .flatMap((page: Page) => page.items)
+    .reduce((categories: CategoryItem[], item: { category: string }) => {
+      const existingCategory = categories.find(
+        (cat: CategoryItem) => cat.name === item.category,
+      );
+
+      if (existingCategory) {
+        existingCategory.value += 1;
+      } else {
+        categories.push({ name: item.category, value: 1 });
+      }
+
+      return categories;
+    }, []);
 }

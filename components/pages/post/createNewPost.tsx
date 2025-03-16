@@ -37,7 +37,7 @@ export const CreatePostCard: React.FC<CreatePostCardProps> = ({
   };
 
   return (
-    <div className="container max-w-4xl py-12">
+    <div className="container max-w-4xl">
       <Card>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <CardContent className="space-y-6 py-6">

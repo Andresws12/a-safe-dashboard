@@ -62,6 +62,10 @@
       "loading": "Cargando..."
     }
   },
+  "Overview": {
+    "titlePage": "Resumen",
+    "description": "Aquí puedes ver un resumen de la aplicación."
+  },
   "dashboard": {
     "title": "Dashboard",
     "listLink": "Listado",
