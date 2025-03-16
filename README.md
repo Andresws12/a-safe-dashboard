@@ -156,18 +156,6 @@ a-safe-dashboard/
 - **Internationalization**: next-intl
 - **Charts**: Chart.js / react-chartjs-2
 
-## Contribution
-
-Contributions are welcome. Please:
-
-1. Fork the repository.
-2. Create a new branch for your feature (`git checkout -b feature/amazing-feature`).
-3. Commit your changes (`git commit -m 'Add some amazing feature'`).
-4. Push your branch (`git push origin feature/amazing-feature`).
-5. Open a Pull Request.
-
-Ensure your changes pass all tests and follow the coding guidelines.
-
 ## License
 
 [MIT](LICENSE)
