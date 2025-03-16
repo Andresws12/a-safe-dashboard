@@ -7,6 +7,7 @@ import { getMessages } from 'next-intl/server';
 import SessionWrapper from '@/components/providers/SessionWrapper';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import ThemeToggle from '@/components/UI/atoms/theme-toggle';
+import LanguageSelector from '@/components/UI/organisms/languaje-selector';
 import { routing } from '@/src/i18n/routing';
 
 import '~/styles/globals.css';
@@ -39,6 +40,7 @@ export default async function RootLayout({
             <ThemeProvider>
               {children}
               <ThemeToggle />
+              <LanguageSelector locale={locale} />
             </ThemeProvider>
           </NextIntlClientProvider>
         </SessionWrapper>
