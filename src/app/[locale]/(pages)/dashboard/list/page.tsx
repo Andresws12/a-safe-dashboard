@@ -9,7 +9,7 @@ export default function Page() {
   const t = useTranslations('Posts');
   const {
     postList: { data, status, hasNextPage, isFetchingNextPage, fetchNextPage },
-  } = usePost();
+  } = usePost(5);
   return (
     <section className="space-y-6 py-8 md:py-6 lg:py-12 p-4">
       <h1 className="text-4xl font-bold m-6">{t('list.titlePage')}</h1>

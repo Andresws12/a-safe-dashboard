@@ -65,7 +65,8 @@
   "dashboard": {
     "title": "Dashboard",
     "listLink": "List",
-    "createLink": "Create"
+    "createLink": "Create",
+    "overviewLink": "Overview"
   },
   "LocaleSwitcher": {
     "switchLocale": "Switch to {locale, select, de {German} en {English} other {Unknown}}"

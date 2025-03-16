@@ -10,14 +10,14 @@ import { addPostSchema } from '~/server/schemas/postSchemas';
 
 type PostFormData = z.infer<typeof addPostSchema>;
 
-export const usePost = () => {
+export const usePost = (limit: number | undefined) => {
   const utils = api.useUtils();
   const { data: session } = useSession();
 
   // Fetch posts
   const { data, status, hasNextPage, isFetchingNextPage, fetchNextPage } =
     api.post.list.useInfiniteQuery(
-      { limit: 5 },
+      { limit: limit },
       { getNextPageParam: (lastPage) => lastPage.nextCursor },
     );
 

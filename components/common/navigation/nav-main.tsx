@@ -30,6 +30,10 @@ export function NavMain() {
       isActive: true,
       items: [
         {
+          title: t('overviewLink'),
+          url: 'overview',
+        },
+        {
           title: t('listLink'),
           url: 'list',
         },
