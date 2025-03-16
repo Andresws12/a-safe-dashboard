@@ -35,6 +35,7 @@ export const usePost = (limit: number | undefined) => {
 
   const onSubmit: SubmitHandler<PostFormData> = async (formData) => {
     type Input = inferProcedureInput<AppRouter['post']['add']>;
+    formData.readTime = `${formData.readTime} min`;
     const input: Input = {
       ...formData,
       date: new Date().toISOString(),
