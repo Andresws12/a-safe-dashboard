@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useMemo } from 'react';
 
+import { Separator } from '@/components/UI/atoms/separator';
+import { SidebarTrigger } from '@/components/UI/layout/sidebar';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,8 +13,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/UI/molecules/breadcrumb';
-import { Separator } from '@/components/UI/atoms/separator';
-import { SidebarTrigger } from '@/components/UI/layout/sidebar';
 
 export default function Header() {
   const pathname = usePathname();

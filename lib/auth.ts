@@ -1,11 +1,9 @@
 import { PrismaAdapter } from '@auth/prisma-adapter';
-import prisma from '@/prisma/db';
-
-import CredentialsProvider from 'next-auth/providers/credentials';
-import NextAuth from 'next-auth';
-
 import { verify } from 'argon2';
+import NextAuth from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
 
+import prisma from '@/prisma/db';
 import { loginSchema } from '~/server/schemas/authSchemas';
 
 const adapter = PrismaAdapter(prisma);
@@ -23,7 +21,7 @@ export const auth = NextAuth({
         },
         password: { label: 'Password', type: 'password' },
       },
-      authorize: async (credentials, request) => {
+      authorize: async (credentials) => {
         try {
           const creds = await loginSchema.parseAsync(credentials);
 
@@ -43,9 +41,9 @@ export const auth = NextAuth({
           return {
             id: user.id,
             email: user.email,
-            username: user.username,
+            name: user.username,
           };
-        } catch (error) {
+        } catch {
           return null;
         }
       },
@@ -56,7 +54,7 @@ export const auth = NextAuth({
       if (user) {
         token.id = user.id;
         token.email = user.email;
-        token.username = user.username;
+        token.name = user.name;
       }
       return token;
     },

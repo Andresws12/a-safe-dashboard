@@ -1,7 +1,8 @@
 'use client';
 
-import { TRPCReactProvider } from '~/trpc/react';
 import { SessionProvider } from 'next-auth/react';
+
+import { TRPCReactProvider } from '~/trpc/react';
 interface SessionWrapperProps {
   children: React.ReactNode;
 }

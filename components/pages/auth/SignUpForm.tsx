@@ -1,21 +1,19 @@
 'use client';
-import React from 'react';
-
 import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import Link from 'next/link';
 
+import { Button } from '@/components/UI/atoms/button';
 import {
   Card,
   CardHeader,
   CardContent,
   CardFooter,
 } from '@/components/UI/molecules/card';
-import { Button } from '@/components/UI/atoms/button';
 import FormField from '@/components/UI/molecules/formField';
-
 import { api } from '@/src/trpc/react';
 import { signUpSchema, ISignUp } from '~/server/schemas/authSchemas';
 

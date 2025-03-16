@@ -1,16 +1,13 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { Clock, Save } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-
-import { Card, CardContent, CardFooter } from '@/components/UI/molecules/card';
-import FormField from '@/components/UI/molecules/formField';
-import { Button } from '@/components/UI/atoms/button';
-import { Label } from '@/components/UI/atoms/label';
-
-import { addPostSchema } from '~/server/schemas/postSchemas';
-
+import { useForm, SubmitHandler } from 'react-hook-form';
 import * as z from 'zod';
 
-import { Clock, Save } from 'lucide-react';
+import { Button } from '@/components/UI/atoms/button';
+import { Label } from '@/components/UI/atoms/label';
+import { Card, CardContent, CardFooter } from '@/components/UI/molecules/card';
+import FormField from '@/components/UI/molecules/formField';
+import { addPostSchema } from '~/server/schemas/postSchemas';
 
 type PostFormData = z.infer<typeof addPostSchema>;
 
@@ -35,8 +32,8 @@ export const CreatePostCard: React.FC<CreatePostCardProps> = ({
     watch,
   } = methods;
 
-  const handleSelectChange = (field: string, value: string) => {
-    setValue(field as any, value);
+  const handleSelectChange = (field: keyof PostFormData, value: string) => {
+    setValue(field, value);
   };
 
   return (

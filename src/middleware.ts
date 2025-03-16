@@ -27,7 +27,10 @@ export default function middleware(req: NextRequest) {
     return intlMiddleware(req);
   } else {
     return (
-      authMiddleware as (req: NextRequest) => ReturnType<typeof intlMiddleware>
+      authMiddleware as (
+        // eslint-disable-next-line no-unused-vars
+        req: NextRequest,
+      ) => ReturnType<typeof intlMiddleware>
     )(req);
   }
 }

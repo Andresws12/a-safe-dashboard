@@ -1,9 +1,8 @@
 import { SquareTerminal } from 'lucide-react';
-
-import { useTranslations } from 'next-intl';
-
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+
 import {
   Collapsible,
   CollapsibleContent,

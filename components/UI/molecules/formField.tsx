@@ -6,7 +6,7 @@ import type {
 import React, { forwardRef } from 'react';
 
 import { Input } from '@/components/UI/atoms/input';
-import { Textarea } from '@/components/UI/atoms/textarea';
+import { Label } from '@/components/UI/atoms/label';
 import {
   Select,
   SelectTrigger,
@@ -14,7 +14,7 @@ import {
   SelectContent,
   SelectItem,
 } from '@/components/UI/atoms/select';
-import { Label } from '@/components/UI/atoms/label';
+import { Textarea } from '@/components/UI/atoms/textarea';
 
 type InputProps = InputHTMLAttributes<HTMLInputElement>;
 type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement>;
@@ -52,14 +52,19 @@ const FormField = forwardRef<
           ((rest as SelectProps).defaultValue as string)
         }
         onValueChange={(value) => {
-          if ((rest as any).onChange) {
-            const event = { target: { value } } as any;
-            (rest as any).onChange(event);
+          if ((rest as SelectProps).onChange) {
+            const event = {
+              target: { value },
+            } as React.ChangeEvent<HTMLSelectElement>;
+            (
+              (rest as SelectProps)
+                .onChange as React.ChangeEventHandler<HTMLSelectElement>
+            )(event);
           }
         }}
       >
         <SelectTrigger id={id} className="w-full">
-          <SelectValue placeholder="Seleccionar..." />
+          <SelectValue placeholder="Select..." />
         </SelectTrigger>
         <SelectContent>
           {options.map((option) => (

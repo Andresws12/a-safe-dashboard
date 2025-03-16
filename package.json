@@ -13,7 +13,7 @@
     "prebuild": "run-s generate migrate",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --cache src",
+    "lint": "eslint --cache components src lib",
     "lint-fix": "pnpm lint --fix",
     "migrate-dev": "prisma migrate dev",
     "migrate": "prisma migrate deploy",

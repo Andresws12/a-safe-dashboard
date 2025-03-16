@@ -36,7 +36,6 @@ import {
   ClipboardList,
   Loader,
 } from 'lucide-react';
-
 import type { LucideIcon, LucideProps } from 'lucide-react';
 
 export type Icon = LucideIcon;
