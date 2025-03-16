@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '@/components/UI/atoms/button';
@@ -24,6 +24,8 @@ export const SignUpForm = () => {
   const router = useRouter();
   const t = useTranslations('Auth');
   const signUp = api.auth.signUp.useMutation();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | undefined>();
 
   const {
     handleSubmit,
@@ -32,9 +34,18 @@ export const SignUpForm = () => {
   } = form;
 
   const onSubmit = async (data: ISignUp) => {
-    const res = await signUp.mutateAsync(data);
-    if (res.status === 201) {
-      router.push('/');
+    setIsLoading(true);
+    try {
+      const res = await signUp.mutateAsync(data);
+      if (res.status === 201) {
+        router.push('/');
+      } else {
+        setError(t('signUp.error'));
+      }
+    } catch {
+      setError(t('signUp.error'));
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -73,9 +84,10 @@ export const SignUpForm = () => {
             {...register('password')}
             error={errors.password?.message}
           />
-          <Button className="w-full" type="submit">
-            {t('signUp.submit')}
+          <Button className="w-full" type="submit" disabled={isLoading}>
+            {isLoading ? t('signUp.loading') : t('signUp.submit')}
           </Button>
+          {error && <div className="text-red-500">{error}</div>}
         </form>
       </CardContent>
 

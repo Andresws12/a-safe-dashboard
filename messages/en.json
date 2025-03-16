@@ -11,7 +11,8 @@
       "email": "Email",
       "password": "Password",
       "signUpDescription": "Don't have an account?",
-      "signUp": "Sign up"
+      "signUp": "Sign up",
+      "loading": "Logging in..."
     },
     "logout": {
       "title": "Logout",
@@ -26,7 +27,9 @@
       "username": "Username",
       "password": "Password",
       "signInDescription": "Already have an account?",
-      "signIn": "Sign in"
+      "signIn": "Sign in",
+      "loading": "Signing up...",
+      "error": "An error occurred"
     }
   },
   "Posts": {

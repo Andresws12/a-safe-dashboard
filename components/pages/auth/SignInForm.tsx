@@ -28,18 +28,24 @@ export const SigInForm = () => {
   const router = useRouter();
   const t = useTranslations('Auth');
   const [error, setError] = useState<string | undefined>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: ILogin) => {
-    const signInResponse = await signIn('credentials', {
-      email: data.email,
-      password: data.password,
-      redirect: false,
-    });
+    setIsLoading(true);
+    try {
+      const signInResponse = await signIn('credentials', {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
 
-    if (signInResponse?.ok) {
-      router.push('/dashboard');
-    } else {
-      setError('Invalid email or password');
+      if (signInResponse?.ok) {
+        router.push('/dashboard');
+      } else {
+        setError('Invalid email or password');
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -70,8 +76,8 @@ export const SigInForm = () => {
             error={errors.password?.message}
             {...register('password')}
           />
-          <Button className="w-full" type="submit">
-            {t('login.submit')}
+          <Button className="w-full" type="submit" disabled={isLoading}>
+            {isLoading ? t('login.loading') : t('login.submit')}
           </Button>
           {error && <div className="text-red-500">{error}</div>}
         </form>

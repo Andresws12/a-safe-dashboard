@@ -11,7 +11,8 @@
       "email": "Correo electrónico",
       "password": "Contraseña",
       "signUpDescription": "¿No tienes una cuenta?",
-      "signUp": "Registrarse"
+      "signUp": "Registrarse",
+      "loading": "Iniciando sesión..."
     },
     "logout": {
       "title": "Cerrar sesión",
@@ -26,7 +27,9 @@
       "username": "Nombre de usuario",
       "password": "Contraseña",
       "signInDescription": "¿Tienes una cuenta?",
-      "signIn": "Iniciar sesión"
+      "signIn": "Iniciar sesión",
+      "loading": "Registrando...",
+      "error": "Ha ocurrido un error"
     }
   },
   "Posts": {

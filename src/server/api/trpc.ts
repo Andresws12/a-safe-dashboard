@@ -6,10 +6,8 @@
  * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
  * need to use are documented accordingly near the end.
  */
-import { initTRPC, TRPCError } from '@trpc/server';
+import { initTRPC } from '@trpc/server';
 import type { NextRequest } from 'next/server';
-import { getToken } from 'next-auth/jwt';
-import type { JWT } from 'next-auth/jwt';
 import superjson from 'superjson';
 import { ZodError } from 'zod';
 
@@ -30,26 +28,11 @@ interface CreateContextOptions {
  * @see https://trpc.io/docs/server/context
  */
 
-interface Context {
-  headers: Headers;
-  req: NextRequest;
-  userId: string;
-  token: JWT; // Using the JWT type from next-auth/jwt
-}
-
 export const createTRPCContext = async (
   opts: CreateContextOptions,
-): Promise<Context> => {
-  const token = await getToken({ req: opts.req });
-
-  if (!token?.id) {
-    throw new TRPCError({ code: 'UNAUTHORIZED' });
-  }
-
+): Promise<CreateContextOptions> => {
   return {
     ...opts,
-    userId: token.id as string,
-    token,
   };
 };
 
