@@ -59,6 +59,11 @@
       "loading": "Cargando..."
     }
   },
+  "dashboard": {
+    "title": "Dashboard",
+    "listLink": "Listado",
+    "createLink": "Crear"
+  },
   "LocaleSwitcher": {
     "switchLocale": "Cambiar a {locale, select, de {Alemán} en {Inglés} other {Desconocido}}"
   },

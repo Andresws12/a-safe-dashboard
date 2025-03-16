@@ -125,6 +125,9 @@ importers:
       eslint-config-next:
         specifier: ^15.2.2
         version: 15.2.2(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2)
+      eslint-plugin-next-intl:
+        specifier: ^1.3.1
+        version: 1.3.1(eslint@9.22.0(jiti@2.4.2))
       eslint-plugin-react:
         specifier: ^7.37.4
         version: 7.37.4(eslint@9.22.0(jiti@2.4.2))
@@ -3084,6 +3087,14 @@ packages:
     engines: { node: '>=4.0' }
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9
+
+  eslint-plugin-next-intl@1.3.1:
+    resolution:
+      {
+        integrity: sha512-HKi85zXbW8PPYNKEJrSr2nbXDJJ6JQI4XoJpEKAVv9AcGAvKRNTlDs9CmUMOpdhFZIqLb28NJnv+YgrjXY6U0Q==,
+      }
+    peerDependencies:
+      eslint: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
 
   eslint-plugin-react-hooks@5.2.0:
     resolution:
@@ -7352,6 +7363,10 @@ snapshots:
       object.fromentries: 2.0.8
       safe-regex-test: 1.1.0
       string.prototype.includes: 2.0.1
+
+  eslint-plugin-next-intl@1.3.1(eslint@9.22.0(jiti@2.4.2)):
+    dependencies:
+      eslint: 9.22.0(jiti@2.4.2)
 
   eslint-plugin-react-hooks@5.2.0(eslint@9.22.0(jiti@2.4.2)):
     dependencies:

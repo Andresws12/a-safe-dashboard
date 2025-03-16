@@ -12,7 +12,7 @@ import {
 import { inferProcedureOutput } from '@trpc/server';
 import { AppRouter } from '~/server/api/root';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useFormatter } from 'next-intl';
 import { Clock } from 'lucide-react';
 
 interface PostListProps {
@@ -31,6 +31,21 @@ export const PostList: React.FC<PostListProps> = ({
   fetchNextPage,
 }) => {
   const t = useTranslations('Posts');
+  const format = useFormatter();
+
+  const parseDate = (dateString: string) => {
+    const date: Date = new Date(dateString);
+    const formattedDate = format
+      .dateTime(date, {
+        minute: 'numeric',
+        hour: 'numeric',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      })
+      .toString();
+    return formattedDate;
+  };
 
   return (
     <section className="w-full py-6 md:py-12 lg:py-16 bg-background">
@@ -55,7 +70,7 @@ export const PostList: React.FC<PostListProps> = ({
                     {post.title}
                   </CardTitle>
                   <CardDescription className="text-sm text-muted-foreground">
-                    {post.date || new Date().toLocaleDateString()}
+                    {parseDate(post.date)}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex-grow">

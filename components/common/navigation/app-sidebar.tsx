@@ -1,4 +1,3 @@
-import { GalleryVerticalEnd, SquareTerminal } from 'lucide-react';
 import NextImage from 'next/image';
 import * as React from 'react';
 
@@ -11,27 +10,6 @@ import {
   SidebarHeader,
   SidebarRail,
 } from '@/components/UI/layout/sidebar';
-
-const data = {
-  navMain: [
-    {
-      title: 'Posts',
-      url: '#',
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: 'Listado',
-          url: 'list',
-        },
-        {
-          title: 'Crear',
-          url: 'create',
-        },
-      ],
-    },
-  ],
-};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -46,7 +24,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain />
       </SidebarContent>
       <SidebarFooter>
         <NavUser />

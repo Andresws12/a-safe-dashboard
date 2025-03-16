@@ -14,6 +14,7 @@ const eslintConfig = [
   ...compat.extends('plugin:react/recommended'),
   ...compat.extends('plugin:@next/next/recommended'),
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  ...compat.extends('plugin:next-intl/recommended'),
   {
     rules: {
       'no-unused-vars': [

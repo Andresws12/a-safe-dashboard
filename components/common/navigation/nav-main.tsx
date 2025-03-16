@@ -1,4 +1,8 @@
-import { ChevronRight, type LucideIcon } from 'lucide-react';
+import { SquareTerminal } from 'lucide-react';
+
+import { useTranslations } from 'next-intl';
+
+import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import {
   Collapsible,
@@ -16,20 +20,27 @@ import {
   SidebarMenuSubItem,
 } from '@/components/UI/layout/sidebar';
 
-export function NavMain({
-  items,
-}: {
-  items: {
-    title: string;
-    url: string;
-    icon?: LucideIcon;
-    isActive?: boolean;
-    items?: {
-      title: string;
-      url: string;
-    }[];
-  }[];
-}) {
+export function NavMain() {
+  const t = useTranslations('dashboard');
+
+  const items = [
+    {
+      title: t('title'),
+      url: '#',
+      icon: SquareTerminal,
+      isActive: true,
+      items: [
+        {
+          title: t('listLink'),
+          url: 'list',
+        },
+        {
+          title: t('createLink'),
+          url: 'create',
+        },
+      ],
+    },
+  ];
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
