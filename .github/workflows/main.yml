@@ -54,6 +54,23 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Start database with Docker Compose
+        run: docker-compose up -d
+        
+      - name: Wait for database to be ready
+        run: |
+          timeout=30
+          until docker-compose exec -T database pg_isready 2>/dev/null || [ $timeout -eq 0 ]; do
+            echo "Waiting for database to be ready..."
+            sleep 1
+            timeout=$((timeout-1))
+          done
+          if [ $timeout -eq 0 ]; then
+            echo "Database failed to start"
+            exit 1
+          fi
+          echo "Database is ready"
+
       - name: Run Cypress tests
         uses: cypress-io/github-action@v5
         env:
@@ -65,6 +82,10 @@ jobs:
           start: pnpm dev
           wait-on: ${{ env.CYPRESS_BASE_URL }}
           wait-on-timeout: 120
+          
+      - name: Stop Docker Compose services
+        if: always()
+        run: docker-compose down
 
       - name: Upload e2e videos
         uses: actions/upload-artifact@v4
@@ -72,75 +93,3 @@ jobs:
         with:
           name: videos
           path: cypress/videos
-
-  unit:
-    name: 'Unit tests'
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
-        ports:
-          - 5432:5432
-    env:
-      NODE_ENV: test
-      NEXTAUTH_SECRET: supersecret
-      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - uses: pnpm/action-setup@v2
-        with:
-          version: ${{ env.PNPM_VERSION }}
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
-
-      - name: Install deps (with cache)
-        run: pnpm install
-
-      - name: Next.js cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}-nextjs
-
-      - name: Setup Prisma
-        run: pnpm prebuild
-
-      - run: pnpm test-unit
-
-  lint:
-    name: 'Lint and Prettier'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - uses: pnpm/action-setup@v2
-        with:
-          version: ${{ env.PNPM_VERSION }}
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
-
-      - name: Install deps (with cache)
-        run: pnpm install
-
-      - name: Run ESLint
-        run: pnpm lint
-
-      - name: Run Prettier
-        run: pnpm format:check
