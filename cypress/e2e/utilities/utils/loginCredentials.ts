@@ -1,11 +1,11 @@
 import { loginSelectors } from '../login/login.selectors';
 
 export const loginCredentials = {
-  USER_TEST_USERNAME: 'TestUser',
   CYPRESS_USER_TEST_EMAIL: Cypress.env('user_test_email'),
   CYPRESS_USER_TEST_PASSWORD: Cypress.env('user_test_password'),
   USER_TEST_WRONG_PASSWORD: 'Test1234$.',
   USER_TEST_WRONG_SHORT_PASSWORD: '1',
+  USER_TEST_USERNAME: 'TestUser',
 };
 
 export const fillLoginForm = (email: string, password: string) => {
