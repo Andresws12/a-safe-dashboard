@@ -2,12 +2,13 @@ name: Testing
 on: [push]
 env:
   CYPRESS_BASE_URL: http://localhost:5173
-  NODE_VERSION: '18.x'
+  NODE_VERSION: '23.3.0'
+  PNPM_VERSION: '9.0.1'
   PNPM_STORE: '~/.pnpm-store'
 
 jobs:
   setup:
-    runs-on: ubuntu-23.3.0
+    runs-on: ubuntu-latest
     outputs:
       cache-key: ${{ steps.cache-keys.outputs.key }}
 
@@ -29,7 +30,7 @@ jobs:
 
   cypress-run:
     needs: setup
-    runs-on: ubuntu-23.3.0
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -46,8 +47,9 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Install pnpm
-        run: npm i -g pnpm
+      - uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
 
       - name: Install dependencies
         run: pnpm install
@@ -95,11 +97,11 @@ jobs:
 
       - uses: pnpm/action-setup@v2
         with:
-          version: 8.5.1
+          version: ${{ env.PNPM_VERSION }}
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 23.3.0
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
 
       - name: Install deps (with cache)
@@ -127,11 +129,11 @@ jobs:
 
       - uses: pnpm/action-setup@v2
         with:
-          version: 9.0.1
+          version: ${{ env.PNPM_VERSION }}
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 23.3.0
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
 
       - name: Install deps (with cache)
