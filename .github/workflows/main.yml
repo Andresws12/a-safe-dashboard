@@ -7,13 +7,15 @@ jobs:
       postgres:
         image: postgres
         env:
-          NEXTAUTH_SECRET: ${{ secrets.AUTH }}
-          DATABASE_URL: ${{ secrets.BD }}
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
         ports:
           - 5432:5432
     env:
       NODE_ENV: test
       NEXTAUTH_SECRET: supersecret
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -28,7 +30,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 22.x
-          cache: 'pnpm' # You can active this cache when your repo has a lockfile
+          cache: 'pnpm'
 
       - name: Install deps (with cache)
         run: pnpm install
@@ -54,14 +56,15 @@ jobs:
       postgres:
         image: postgres
         env:
-          NEXTAUTH_SECRET: ${{ secrets.AUTH }}
-          DATABASE_URL: ${{ secrets.BD }}
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
         ports:
           - 5432:5432
     env:
       NODE_ENV: test
-      NEXTAUTH_SECRET: ${{ secrets.AUTH }}
-      DATABASE_URL: ${{ secrets.BD }}
+      NEXTAUTH_SECRET: supersecret
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -76,7 +79,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 22.x
-          cache: 'pnpm' # You can active this cache when your repo has a lockfile
+          cache: 'pnpm'
 
       - name: Install deps (with cache)
         run: pnpm install
@@ -92,3 +95,30 @@ jobs:
 
       - run: pnpm test-unit
       - run: pnpm tsc
+
+  lint:
+    name: 'Lint and Prettier'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8.5.1
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 22.x
+          cache: 'pnpm'
+
+      - name: Install deps (with cache)
+        run: pnpm install
+
+      - name: Run ESLint
+        run: pnpm lint
+
+      - name: Run Prettier
+        run: pnpm format:check
