@@ -2,7 +2,9 @@
 
 ## Overview
 
-A secure administration dashboard built with modern technologies that provides a robust foundation for web applications with end-to-end type safety, authentication, and more.
+A Safe Dashboard full-stack web application built with Next.js 15 that provides a secure, type-safe environment for data management and visualization.
+Using tRPC for end-to-end type safety, Zod for schema validation, and Prisma ORM for database operations.
+The application have a responsive UI built with Tailwind CSS and shadcn components, authentication through NextAuth.js, and internationalization support.
 
 ## Features
 
