@@ -104,7 +104,11 @@ const FormField = forwardRef<
         />
       )}
 
-      {error && <span className="mt-1 text-sm text-red-500">{error}</span>}
+      {error && (
+        <span className="mt-1 text-sm text-red-500" data-cy={`${dataCy}-error`}>
+          {error}
+        </span>
+      )}
     </div>
   ),
 );

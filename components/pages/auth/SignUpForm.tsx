@@ -65,6 +65,7 @@ export const SignUpForm = () => {
             label={t('signUp.username')}
             placeholder={t('signUp.username')}
             type="input"
+            dataCy="sign-up-username"
             {...register('username')}
             error={errors.username?.message}
           />
@@ -73,6 +74,7 @@ export const SignUpForm = () => {
             label={t('signUp.email')}
             placeholder={t('signUp.email')}
             type="email"
+            dataCy="sign-up-email"
             {...register('email')}
             error={errors.email?.message}
           />
@@ -81,19 +83,33 @@ export const SignUpForm = () => {
             label={t('signUp.password')}
             placeholder={t('signUp.password')}
             type="password"
+            dataCy="sign-up-password"
             {...register('password')}
             error={errors.password?.message}
           />
-          <Button className="w-full" type="submit" disabled={isLoading}>
+          <Button
+            className="w-full"
+            type="submit"
+            disabled={isLoading}
+            data-cy="sign-up-submit"
+          >
             {isLoading ? t('signUp.loading') : t('signUp.submit')}
           </Button>
-          {error && <div className="text-red-500">{error}</div>}
+          {error && (
+            <div className="text-red-500" data-cy="sign-up-error-api">
+              {error}
+            </div>
+          )}
         </form>
       </CardContent>
 
       <CardFooter className="text-center">
         {t('signUp.signInDescription')}{' '}
-        <Button className="font-medium hover:underline" variant="link">
+        <Button
+          className="font-medium hover:underline"
+          variant="link"
+          data-cy="sign-up-login-button"
+        >
           <Link href="/">{t('signUp.signIn')}</Link>
         </Button>
       </CardFooter>

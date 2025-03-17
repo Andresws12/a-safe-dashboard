@@ -63,7 +63,7 @@ export const SigInForm = () => {
           <FormField
             id="email"
             label={t('login.email')}
-            dataCy="login-login-email"
+            dataCy="login-email"
             placeholder={t('login.email')}
             type="input"
             error={errors.email?.message}
@@ -72,7 +72,7 @@ export const SigInForm = () => {
           <FormField
             id="password"
             label={t('login.password')}
-            dataCy="login-login-password"
+            dataCy="login-password"
             placeholder={t('login.password')}
             type="password"
             error={errors.password?.message}
@@ -82,7 +82,7 @@ export const SigInForm = () => {
             className="w-full"
             type="submit"
             disabled={isLoading}
-            data-cy="login-login-submit"
+            data-cy="login-submit"
           >
             {isLoading ? t('login.loading') : t('login.submit')}
           </Button>
@@ -99,7 +99,7 @@ export const SigInForm = () => {
         <Button
           variant="link"
           className="font-medium hover:underline"
-          data-cy="login-login-sign-up-button"
+          data-cy="login-sign-up-button"
         >
           <Link href="/sign-up">{t('login.signUp')}</Link>
         </Button>
