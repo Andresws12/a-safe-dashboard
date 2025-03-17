@@ -1,18 +1,31 @@
 import { loginSelectors } from './utilities/login/login.selectors';
-import { loginCredentials } from './utilities/utils/loginCredentials';
+import {
+  loginCredentials,
+  submitLogin,
+} from './utilities/utils/loginCredentials';
 
-describe('Login spec', () => {
+describe('Login Functionality', () => {
   beforeEach(() => {
-    cy.visit('/login');
+    cy.visit('/');
   });
-  it('Login', () => {
-    cy.get(loginSelectors.loginEmailInput).type(
+
+  it('Should successfully login with valid credentials', () => {
+    submitLogin(
       loginCredentials.CYPRESS_USER_TEST_EMAIL,
-    );
-    cy.get(loginSelectors.loginPasswordInput).type(
       loginCredentials.CYPRESS_USER_TEST_PASSWORD,
     );
-    cy.get(loginSelectors.loginSubmitButton).click();
+
     cy.url().should('include', '/dashboard');
+  });
+
+  it('Should show error when login with invalid credentials', () => {
+    submitLogin(
+      loginCredentials.CYPRESS_USER_TEST_EMAIL,
+      loginCredentials.USER_TEST_WRONG_PASSWORD,
+    );
+
+    cy.get(loginSelectors.loginError).should('be.visible');
+
+    cy.url().should('include', '/');
   });
 });

@@ -8,10 +8,11 @@ const loginPasswordInput = cySelector(
 );
 const loginSubmitButton = cySelector(`${baseDescription}-login-submit`);
 const loginSignUpButton = cySelector(`${baseDescription}-login-sign-up-button`);
-
+const loginError = cySelector(`${baseDescription}-error`);
 export const loginSelectors = {
   loginEmailInput,
   loginPasswordInput,
   loginSubmitButton,
   loginSignUpButton,
+  loginError,
 };

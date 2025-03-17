@@ -64,9 +64,11 @@ pnpm install
 ### Development Mode
 
 Start all services (database, migrations, seeding, and Next.js) with:
+
 ```bash
 pnpm dx
 ```
+
 This command starts the PostgreSQL database, runs migrations, seeds initial data, and launches the Next.js server.
 
 ## Available Commands

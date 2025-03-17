@@ -86,7 +86,11 @@ export const SigInForm = () => {
           >
             {isLoading ? t('login.loading') : t('login.submit')}
           </Button>
-          {error && <div className="text-red-500">{error}</div>}
+          {error && (
+            <div className="text-red-500" data-cy="login-error">
+              {error}
+            </div>
+          )}
         </form>
       </CardContent>
 
