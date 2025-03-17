@@ -6,8 +6,10 @@ export default defineConfig({
     globals: true,
     exclude: [...configDefaults.exclude, '**/playwright/**'],
     alias: {
+      '@': fileURLToPath(new URL('./', import.meta.url)), // alias agregado para que "@" apunte a la raíz del proyecto
       '~/': fileURLToPath(new URL('./src/', import.meta.url)),
     },
     setupFiles: ['dotenv/config'],
+    environment: 'jsdom',
   },
 });

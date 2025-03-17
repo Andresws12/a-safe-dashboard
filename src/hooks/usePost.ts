@@ -8,7 +8,7 @@ import { api } from '@/src/trpc/react';
 import { AppRouter } from '~/server/api/root';
 import { addPostSchema } from '~/server/schemas/postSchemas';
 
-type PostFormData = z.infer<typeof addPostSchema>;
+export type PostFormData = z.infer<typeof addPostSchema>;
 
 export const usePost = (limit: number | undefined) => {
   const utils = api.useUtils();
