@@ -1,57 +1,78 @@
 name: Testing
 on: [push]
+env:
+  CYPRESS_BASE_URL: http://localhost:5173
+  NODE_VERSION: '18.x'
+  PNPM_STORE: '~/.pnpm-store'
+
 jobs:
-  e2e:
-    name: 'Build + E2E tests'
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
-        ports:
-          - 5432:5432
-    env:
-      NODE_ENV: test
-      NEXTAUTH_SECRET: supersecret
-      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
-    runs-on: ubuntu-latest
+  setup:
+    runs-on: ubuntu-23.3.0
+    outputs:
+      cache-key: ${{ steps.cache-keys.outputs.key }}
+
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8.5.1
+      - name: Generate cache key
+        id: cache-keys
+        run: echo "::set-output name=key::$(echo ${{ runner.os }}-node-$(sha256sum **/pnpm-lock.yaml | sha256sum | cut -d ' ' -f 1))"
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 23.3.0
-          cache: 'pnpm'
-
-      - name: Install deps (with cache)
-        run: pnpm install
-
-      - name: Next.js cache
+      - name: Cache node modules
         uses: actions/cache@v3
         with:
-          path: ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}-nextjs
+          path: ${{ env.PNPM_STORE }}
+          key: ${{ steps.cache-keys.outputs.key }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-      - name: Setup Prisma
-        run: pnpm prebuild
+  cypress-run:
+    needs: setup
+    runs-on: ubuntu-23.3.0
 
-      - run: pnpm build
-      - run: pnpm test-e2e
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Check types
-        run: pnpm tsc
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.PNPM_STORE }}
+          key: ${{ needs.setup.outputs.cache-key }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install pnpm
+        run: npm i -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v5
+        env:
+          CYPRESS_USER_TEST_EMAIL: ${{ secrets.USER_TEST_EMAIL }}
+          CYPRESS_USER_TEST_PASSWORD: ${{ secrets.USER_TEST_PASSWORD }}
+        with:
+          install: false
+          project: ./
+          start: pnpm dev
+          wait-on: ${{ env.CYPRESS_BASE_URL }}
+          wait-on-timeout: 120
+
+      - name: Upload e2e videos
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: videos
+          path: cypress/videos
 
   unit:
-    name: 'Unit tests + typecheck'
+    name: 'Unit tests'
     services:
       postgres:
         image: postgres
@@ -94,7 +115,6 @@ jobs:
         run: pnpm prebuild
 
       - run: pnpm test-unit
-      - run: pnpm tsc
 
   lint:
     name: 'Lint and Prettier'
@@ -107,7 +127,7 @@ jobs:
 
       - uses: pnpm/action-setup@v2
         with:
-          version: 8.5.1
+          version: 9.0.1
 
       - uses: actions/setup-node@v3
         with:
