@@ -8,16 +8,3 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - '3000:3000'
-    environment:
-      NEXTAUTH_SECRET: supersecret
-      NEXTAUTH_URL: 'http://localhost:3000'
-      DEPLOY_URL: 'http://localhost:3000'
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/postgres
-    depends_on:
-      - db

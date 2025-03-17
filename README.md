@@ -44,15 +44,30 @@ pnpm install
    ```bash
    cp .env.example .env
    ```
-2. Update environment variables as necessary
+2. Update environment variables as necessary.
 
-### Launch Development Mode
+### Local Setup
 
+1. Configure the Node.js version:
+   ```bash
+   nvm use
+   ```
+2. Start the PostgreSQL database:
+   ```bash
+   docker compose up -d
+   ```
+3. Launch the development environment:
+   ```bash
+   pnpm dx
+   ```
+
+### Development Mode
+
+Start all services (database, migrations, seeding, and Next.js) with:
 ```bash
 pnpm dx
 ```
-
-This command starts the PostgreSQL database, runs migrations, seeds the database with initial data, and launches the Next.js development server.
+This command starts the PostgreSQL database, runs migrations, seeds initial data, and launches the Next.js server.
 
 ## Available Commands
 
@@ -60,14 +75,14 @@ This command starts the PostgreSQL database, runs migrations, seeds the database
 
 ```bash
 pnpm dev        # Starts the Next.js development server
-pnpm dx         # Starts PostgreSQL, runs migrations, seeds DB, and launches Next.js
+pnpm dx         # Initializes PostgreSQL, migrates, seeds the DB, and launches Next.js
 ```
 
 ### Database
 
 ```bash
 pnpm generate        # Generates the Prisma client
-pnpm prisma-studio   # Opens Prisma Studio to manage the database
+pnpm prisma-studio   # Opens Prisma Studio for database management
 pnpm db-seed         # Seeds the database with initial data
 pnpm db-reset        # Resets the local database
 pnpm migrate-dev     # Runs migrations in development
