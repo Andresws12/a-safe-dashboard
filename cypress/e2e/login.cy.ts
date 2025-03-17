@@ -19,7 +19,7 @@ describe('Authentication Functionality', () => {
 
     it('should successfully sign up with valid credentials', () => {
       submitSignUp(
-        loginCredentials.CYPRESS_USER_TEST_USERNAME,
+        loginCredentials.USER_TEST_USERNAME,
         loginCredentials.CYPRESS_USER_TEST_EMAIL,
         loginCredentials.CYPRESS_USER_TEST_PASSWORD,
       );
@@ -29,7 +29,7 @@ describe('Authentication Functionality', () => {
 
     it('should show error when signing up with invalid credentials', () => {
       submitSignUp(
-        loginCredentials.CYPRESS_USER_TEST_USERNAME,
+        loginCredentials.USER_TEST_USERNAME,
         loginCredentials.CYPRESS_USER_TEST_EMAIL,
         loginCredentials.USER_TEST_WRONG_SHORT_PASSWORD,
       );

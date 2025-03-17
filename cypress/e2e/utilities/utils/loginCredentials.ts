@@ -1,7 +1,7 @@
 import { loginSelectors } from '../login/login.selectors';
 
 export const loginCredentials = {
-  CYPRESS_USER_TEST_USERNAME: 'TestUser',
+  USER_TEST_USERNAME: 'TestUser',
   CYPRESS_USER_TEST_EMAIL: Cypress.env('user_test_email'),
   CYPRESS_USER_TEST_PASSWORD: Cypress.env('user_test_password'),
   USER_TEST_WRONG_PASSWORD: 'Test1234$.',
